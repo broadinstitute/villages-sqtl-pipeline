@@ -1,14 +1,14 @@
 version: 1.2
 workflows:
-   - name: "village-sc-sQTLs"
-     subclass: WDL
-     primaryDescriptorPath: /sqtl-pipeline.wdl
-     filters: 
-        branches: 
-          - main
-          - dev
-        tags: 
-          - /.*/
+  #  - name: "village-sc-sQTLs"
+  #    subclass: WDL
+  #    primaryDescriptorPath: /sqtl-pipeline.wdl
+  #    filters: 
+  #       branches: 
+  #         - main
+  #         - dev
+  #       tags: 
+  #         - /.*/
 
    - name: "subwf-merge-bam"
      subclass: WDL
