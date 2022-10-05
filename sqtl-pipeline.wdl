@@ -8,4 +8,8 @@ workflow sQTL_pipeline {
   input {
     Array[String] samples # list of donors
   }
+
+  call merge_bam_by_donor {
+    
+  }
 }
