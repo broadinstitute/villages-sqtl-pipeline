@@ -75,6 +75,8 @@ if __name__=='__main__':
             + ' ' + os.path.join(args.output_dir, f'{args.prefix}.leafcutter.clusters_to_genes.txt')
             # + f' -o {args.output_dir}'
         subprocess.check_call(cmd, shell=True)
+        cmd = f'mv -f /**/{args.prefix}.leafcutter.clusters_to_genes.txt ' + args.output_dir + ' 2>/dev/null; true'
+        subprocess.check_call(cmd, shell=True)
 
     print('  * filtering counts')
     counts_df = pd.read_csv(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.gz'), sep='\s+').set_index('chrom')
@@ -182,15 +184,15 @@ if __name__=='__main__':
     pc_df.to_csv(os.path.join(args.output_dir, f'{args.prefix}.leafcutter.PCs.txt'), sep='\t')
 
     # delete intermediary files
-    files = glob.glob(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.qqnorm_chr*')) \
-          + glob.glob(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.phen_chr*'))
-    for f in files:
-        os.remove(f)
-    os.remove(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz_prepare.sh'))
-    os.remove(os.path.join(args.output_dir, f'{args.prefix}.leafcutter.clusters_to_genes.txt'))
-    os.remove(os.path.join(args.output_dir, f'{args.prefix}.perind.counts.filtered.qqnorm.bed.gz'))
-    os.remove(os.path.join(args.output_dir, f'{args.prefix}.perind.counts.filtered.qqnorm.bed.gz.tbi'))
-    os.remove(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.ave'))
-    os.remove(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.PCs'))
+    # files = glob.glob(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.qqnorm_chr*')) \
+    #       + glob.glob(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.phen_chr*'))
+    # for f in files:
+    #     os.remove(f)
+    # os.remove(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz_prepare.sh'))
+    # os.remove(os.path.join(args.output_dir, f'{args.prefix}.leafcutter.clusters_to_genes.txt'))
+    # os.remove(os.path.join(args.output_dir, f'{args.prefix}.perind.counts.filtered.qqnorm.bed.gz'))
+    # os.remove(os.path.join(args.output_dir, f'{args.prefix}.perind.counts.filtered.qqnorm.bed.gz.tbi'))
+    # os.remove(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.ave'))
+    # os.remove(os.path.join(args.output_dir, f'{args.prefix}_perind.counts.filtered.gz.PCs'))
 
     print(f'[{datetime.now().strftime("%b %d %H:%M:%S")}] done')
